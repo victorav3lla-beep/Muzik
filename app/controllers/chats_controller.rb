@@ -1,7 +1,9 @@
 class ChatsController < ApplicationController
-  def new
-    @chat = Chat.new
+  def show
+    @chat    = current_user.chats.find(params[:id])
+    @message = Message.new
   end
+
   def create
     @playlist = Playlist.find(params[:playlist_id])
 
@@ -16,8 +18,9 @@ class ChatsController < ApplicationController
     end
   end
 
-  def show
-    @chat    = current_user.chats.find(params[:id])
-    @message = Message.new
+  private
+
+  def chat_params
+    params.require(:chat).permit(:title,)
   end
 end
