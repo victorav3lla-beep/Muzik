@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   root to: "pages#home"
 
-  resources :playlists, only: [:index, :show] do
+  resources :playlists, only: [:index, :show, :new, :create] do
     resources :chats, only: [:create, :new]
   end
 
@@ -18,4 +18,5 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+  get '/profile', to: 'users#show', as: :user_profile
 end
