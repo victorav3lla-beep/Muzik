@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="col">
+    <h1><%= @playlist.title %></h1>
+    <%= raw((@playlist.content)) %>
+  </div>
+  <div class="col-md-3">
+    <h2>Chats</h2>
+    <div class="mb-4">
+      <% if @playlist.chats.any? %>
+        <ul>
+          <% @playlist.chats.each do |chat| %>
+            <li><%= link_to chat.title, chat_path(chat) %></li>
+          <% end %>
+        </ul>
+      <% else %>
+        There are no chats yet.
+      <% end %>
+      <%= button_to "New chat", new_playlist_chat_path(@playlist), class: "btn btn-primary" %>
+    </div>
+  </div>
+</div>
