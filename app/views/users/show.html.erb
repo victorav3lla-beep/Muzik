@@ -1,0 +1,49 @@
+<div class="container my-5">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card shadow-sm">
+        <div class="card-body text-center">
+          <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar-large mb-3" %>
+          <h3><%= @user.username %></h3>
+          <p class="text-muted"><%= @user.email %></p>
+
+          <hr>
+
+          <div class="d-flex justify-content-around">
+            <div>
+              <h4><%= @playlists.count %></h4>
+              <small class="text-muted">Playlists</small>
+            </div>
+            <div>
+              <h4>0</h4>
+              <small class="text-muted">Followers</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-8">
+      <h2 class="mb-4">My Playlists</h2>
+
+      <% if @playlists.any? %>
+        <div class="row">
+          <% @playlists.each do |playlist| %>
+            <div class="col-md-6 mb-3">
+              <div class="card h-100">
+                <div class="card-body">
+                  <h5 class="card-title"><%= playlist.title %></h5>
+                  <p class="card-text text-muted"><%= playlist.content %></p>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+        <div class="alert alert-info">
+          You don't have any playlists yet.
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
