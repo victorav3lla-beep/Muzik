@@ -5,12 +5,12 @@ class MessagesController < ApplicationController
 
     @message = Message.new(message_params)
     @message.chat = @chat
-    @message.role = "user"
+    @message.user = true
 
     if @message.save
       muzik_chat = RubyLLM.chat
-      response = muzik_chat.with_instructions(instructions).ask(@message.content)
-      Message.create(role: "assistant", content: response.content, chat: @chat)
+      response = muzik_chat.ask(@message.content)
+      Message.create(user: false, content: response.content, chat: @chat)
 
       redirect_to chat_messages_path(@chat)
     else
