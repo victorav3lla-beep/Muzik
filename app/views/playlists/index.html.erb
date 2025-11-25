@@ -1,0 +1,7 @@
+<h1>My Playlists</h1>
+
+<% @playlists.each do |playlist| %>
+<%= playlist.title %>
+<%= playlist.content %>
+<%= link_to "View playlist", playlist, class: "btn btn-success" %>
+<% end %>
