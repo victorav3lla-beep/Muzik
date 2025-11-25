@@ -1,7 +1,23 @@
-<h1>Show Playlists</h1>
-<p>Find me in app/views/playlists/show.html.erb</p>
-
-<%= @playlist.title %>
-<%= @playlist.content %>
+<div class="row">
+  <div class="col">
+    <h1><%= @playlist.title %></h1>
+    <%= raw((@playlist.content)) %>
+  </div>
+  <div class="col-md-3">
+    <h2>Chats</h2>
+    <div class="mb-4">
+      <% if @playlist.chats.any? %>
+        <ul>
+          <% @playlist.chats.each do |chat| %>
+            <li><%= link_to chat.title, chat_path(chat) %></li>
+          <% end %>
+        </ul>
+      <% else %>
+        There are no chats yet.
+      <% end %>
+      <%= button_to "New chat", playlist_chats_path(@playlist), class: "btn btn-primary" %>
+    </div>
+  </div>
+</div>
 
 <%= link_to "Back to playlists", class = "button", playlist_path(playlist) %>
