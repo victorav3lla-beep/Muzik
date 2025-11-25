@@ -1,0 +1,8 @@
+<h1>New playlist</h1>
+
+<p>What are you in the mood to listen to? 🎶🎵</p>
+
+<%= simple_form_for @playlist do |f| %>
+  <%= f.input :title, required: true, label: "Type the kind of music you like here" %>
+  <%= f.button :submit, 'Create Playlist', class: 'btn btn-warning' %>
+<% end %>
