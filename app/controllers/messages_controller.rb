@@ -3,7 +3,12 @@ SYSTEM_PROMPT = "You are a Playlists Creator\n\nI am a Spotify user who wants to
 
   def create
     @chat = current_user.chats.find(params[:chat_id])
+<<<<<<< HEAD
     @playlist = @chat.playlist
+=======
+    # @playlist = @chat.playlist
+
+>>>>>>> master
     @message = Message.new(message_params)
     @message.chat = @chat
     @message.user = true

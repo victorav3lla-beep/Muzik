@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_11_25_114241) do
+ActiveRecord::Schema[7.1].define(version: 2025_11_26_120302) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -26,10 +26,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_25_114241) do
   create_table "chats", force: :cascade do |t|
     t.string "title"
     t.bigint "user_id", null: false
-    t.bigint "playlist_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["playlist_id"], name: "index_chats_on_playlist_id"
     t.index ["user_id"], name: "index_chats_on_user_id"
   end
 
@@ -90,7 +88,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_25_114241) do
 
   add_foreign_key "bookmarks", "playlists"
   add_foreign_key "bookmarks", "users"
-  add_foreign_key "chats", "playlists"
   add_foreign_key "chats", "users"
   add_foreign_key "messages", "chats"
   add_foreign_key "playlist_tracks", "playlists"
