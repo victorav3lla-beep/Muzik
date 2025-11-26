@@ -7,7 +7,7 @@ class PlaylistsController < ApplicationController
 
   def create
     @playlist = current_user.Playlist.new(playlist_params)
-    @playlist.made = RubyLLM.chat.ask("Generate a playlist from this text: #{@playlist.query}").content
+    # @playlist.made = RubyLLM.chat.ask("Generate a playlist from this text: #{@playlist.query}").content
     if @playlist.save
     redirect_to playlist_path(@playlist), notice: "Playlist was successfully created! WOOOOO!!🎉🎉"
     else

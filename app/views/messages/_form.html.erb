@@ -1,0 +1,4 @@
+<%= simple_form_for [@chat, @message] do |f| %>
+  <%= f.input :content, label: "Ask a question", required: true, placeholder: "I want to discover new muzik" %>
+  <%= f.button :submit, 'Create Playlist', class: 'btn btn-primary' %>
+<% end %>

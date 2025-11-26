@@ -3,12 +3,8 @@ SYSTEM_PROMPT = "You are a Playlists Creator\n\nI am a Spotify user who wants to
 
   def create
     @chat = current_user.chats.find(params[:chat_id])
-<<<<<<< HEAD
-    @playlist = @chat.playlist
-=======
     # @playlist = @chat.playlist
 
->>>>>>> master
     @message = Message.new(message_params)
     @message.chat = @chat
     @message.user = true
@@ -23,11 +19,17 @@ SYSTEM_PROMPT = "You are a Playlists Creator\n\nI am a Spotify user who wants to
 
       @chat.generate_title_from_first_message
 
-      redirect_to chat_messages_path(@chat)
+      respond_to do |format|
+        format.turbo_stream
+        format.html { redirect_to chat_path(@chat)}
+      end
     else
       respond_to do |format|
-        format.turbo_stream { render turbo_stream: turbo_stream.replace'new_message'}
+        format.turbo_stream { render turbo_stream: turbo_stream.replace('new_message',
+                                      partial: 'messages/form',
+                                      locals: { chat: @chat, message: @message }) }
         format.html { render "chats/show", status: :unprocessable_entity }
+      end
     end
   end
 
@@ -36,7 +38,12 @@ SYSTEM_PROMPT = "You are a Playlists Creator\n\nI am a Spotify user who wants to
 
   def build_conversation_history
     @chat.messages.each do |message|
-      @ruby_llm_chat.add_message(message)
+      role = message.user? ? :user : :assistant
+
+      @ruby_llm_chat.add_message(
+        role: role,
+        content: message.content
+      )
     end
   end
 
