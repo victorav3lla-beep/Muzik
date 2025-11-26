@@ -14,7 +14,7 @@ class PlaylistsController < ApplicationController
     render :new, status: :unprocessable_entity
     end
   end
-
+  
   def index
     @playlists = current_user.playlists
   end

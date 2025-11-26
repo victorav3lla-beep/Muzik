@@ -1,0 +1,3 @@
+<%= turbo_stream.replace "bookmark_#{@bookmarkable.class.name.downcase}_#{@bookmarkable.id}" do %>
+  <%= bookmark_button(@bookmarkable, current_user) %>
+<% end %>

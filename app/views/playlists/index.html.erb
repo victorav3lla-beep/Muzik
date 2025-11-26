@@ -1,11 +1,18 @@
-<h1>Playlists#index</h1>
-<p>Find me in app/views/playlists/index.html.erb</p>
+<h1>Playlists</h1>
 
-<%= link_to "Create New PLaylist", new_playlist_path, class: "button"%>
+<%= link_to "Create New Playlist", new_playlist_path, class: "btn btn-primary mb-3"%>
 
-<ul>
+<div class="playlist-list">
   <% @playlists.each do |playlist| %>
-    <li><%= link_to playlist.title, playlist_path(playlist) %></li>
+    <div class="card mb-3">
+      <div class="card-body d-flex justify-content-between align-items-center">
+        <div>
+          <h5 class="card-title"><%= link_to playlist.title, playlist_path(playlist) %></h5>
+          <p class="text-muted mb-0">By <%= playlist.user.email %></p>
+        </div>
+        <%= bookmark_button(playlist) %>
+      </div>
+    </div>
   <% end %>
-</ul>
+</div>
 
