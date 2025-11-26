@@ -1,6 +1,8 @@
 class PlaylistsController < ApplicationController
   def new
     @playlist = Playlist.new
+    @chat = Chat.new
+    @message = Message.new
   end
 
   def create

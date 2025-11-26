@@ -2,7 +2,6 @@
 
 <h1 id="chat_title"><%= @chat.title %></h1>
 
-
 <% @chat.messages.each do |message| %>
   <p>
     <strong><%= message.role_string %></strong>
@@ -13,6 +12,6 @@
 <div id="new_message_container">
   <%= simple_form_for [@chat, @message] do |f| %>
     <%= f.input :content, label: "Ask a question", required: true, placeholder: "I want to discover new muzik" %>
-    <%= f.button :submit, 'Ask LLM', class: 'btn btn-primary' %>
+    <%= f.button :submit, 'Create Playlist', class: 'btn btn-primary' %>
   <% end %>
 </div>

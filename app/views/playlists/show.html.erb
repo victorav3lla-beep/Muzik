@@ -15,9 +15,9 @@
       <% else %>
         There are no chats yet.
       <% end %>
-      <%= button_to "New chat", playlist_chats_path(@playlist), class: "btn btn-primary" %>
+      <%# <%= button_to "New chat", playlist_chats_path(@playlist), class: "btn btn-primary" %> %>
     </div>
   </div>
 </div>
 
-<%= link_to "Back to playlists", class = "button", playlist_path(playlist) %>
+<%= link_to "Back to playlists", playlists_path, class: "button" %>
