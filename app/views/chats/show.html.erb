@@ -2,6 +2,7 @@
 
 <h1 id="chat_title"><%= @chat.title %></h1>
 
+
 <% @chat.messages.each do |message| %>
   <p>
     <strong><%= message.role_string %></strong>
