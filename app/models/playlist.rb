@@ -1,5 +1,11 @@
 class Playlist < ApplicationRecord
   belongs_to :user
-  has_many :bookmarks, dependent: :destroy
+
+  # Bookmarks for this playlist (likes)
+  has_many :bookmarks, as: :bookmarkable, dependent: :destroy
+
+  # Users who bookmarked/liked this playlist
+  has_many :bookmarked_by_users, through: :bookmarks, source: :user
+
   # has_many :chats, dependent: :destroy
 end
