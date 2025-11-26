@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   end
 
   resources :chats, only: :show do
-    resources :messages, only: [:create]
+    resources :messages
   end
 
   # Bookmarks (for liking playlists and following users)

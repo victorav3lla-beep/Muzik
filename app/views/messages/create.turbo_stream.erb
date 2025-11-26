@@ -1,0 +1,14 @@
+<%# check if the title of the chat has been changed in the DB %>
+<% if @chat.title_previously_changed? %>
+    <%= turbo_stream.update 'chat_title', @chat.title %>
+<% end %>
+
+<%# to inject the last two messages (my question + AI's response) into the bottom of the chat %>
+<%= turbo_stream.append 'messages' do %>
+    <%= render 'messages/chat_messages', messages: @chat.messages.last(2) %>
+<% end %>
+
+<%# to refresh the form %>
+<%= turbo_stream.update 'new_message_container' do %>
+    <%= render 'messages/form', chat: @chat, message: Message.new %>
+<% end %>

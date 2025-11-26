@@ -1,0 +1,15 @@
+<% messages.each do |message| %>
+    <% if message.user == true %>
+        <div class="d-flex justify-content-end mb-2">
+            <div class="bg-white px-3 pb-0 pt-3 rounded-pill">
+                <%= raw((message.content)) %>
+            </div>
+        </div>
+    <% elsif message.user == false %>
+        <div class="d-flex justify-content-start mb-5">
+            <div class="px-3 pb-0 pt-3">
+                <%= raw((message.content)) %>
+            </div>
+        </div>
+    <% end %>
+<% end %>

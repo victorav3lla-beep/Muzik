@@ -2,16 +2,10 @@
 
 <h1 id="chat_title"><%= @chat.title %></h1>
 
-<% @chat.messages.each do |message| %>
-  <p>
-    <strong><%= message.role_string %></strong>
-    <%= raw((message.content)) %>
-  </p>
-<% end %>
+<div id="messages">
+  <%= render "messages/chat_messages", messages: @chat.messages %>
+</div>
 
 <div id="new_message_container">
-  <%= simple_form_for [@chat, @message] do |f| %>
-    <%= f.input :content, label: "Ask a question", required: true, placeholder: "I want to discover new muzik" %>
-    <%= f.button :submit, 'Ask LLM', class: 'btn btn-primary' %>
-  <% end %>
+  <%= render "messages/form", chat: @chat, message: @message %>
 </div>

@@ -1,4 +1,5 @@
 class ChatsController < ApplicationController
+
   def show
     @chat    = current_user.chats.find(params[:id])
     @message = Message.new
@@ -14,13 +15,13 @@ class ChatsController < ApplicationController
     if @chat.save
       redirect_to chat_path(@chat)
     else
-      render "playlists/show"
+      render "playlists/show", status: :unprocessable_entity
     end
   end
 
   private
 
   def chat_params
-    params.require(:chat).permit(:title,)
+    params.require(:chat).permit(:title)
   end
 end
