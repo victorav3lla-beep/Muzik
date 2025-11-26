@@ -9,8 +9,9 @@ class MessagesController < ApplicationController
 
     if @message.save
       muzik_chat = RubyLLM.chat
-      response = muzik_chat.ask(@message.content)
+      response = muzik_chat.with_instructions(instructions).ask(@message.content)
       Message.create(user: false, content: response.content, chat: @chat)
+      @chat.generate_title_from_first_message
 
       redirect_to chat_messages_path(@chat)
     else
