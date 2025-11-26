@@ -1,7 +1,7 @@
 class MessagesController < ApplicationController
   def create
     @chat = current_user.chats.find(params[:chat_id])
-    @playlist = @chat.playlist
+    # @playlist = @chat.playlist
 
     @message = Message.new(message_params)
     @message.chat = @chat

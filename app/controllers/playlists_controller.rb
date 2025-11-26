@@ -1,11 +1,13 @@
 class PlaylistsController < ApplicationController
   def new
     @playlist = Playlist.new
+    @chat = Chat.create(user: current_user, title: "chat")
+    @message = Message.new
   end
 
   def create
     @playlist = current_user.Playlist.new(playlist_params)
-    # @playlist.made = RubyLLM.chat.ask("Generate a playlist from this text: #{@playlist.queary}").content
+    @playlist.made = RubyLLM.chat.ask("Generate a playlist from this text: #{@playlist.query}").content
     if @playlist.save
     redirect_to playlist_path(@playlist), notice: "Playlist was successfully created! WOOOOO!!🎉🎉"
     else
@@ -24,7 +26,7 @@ class PlaylistsController < ApplicationController
   private
 
   def playlist_params
-    params.require(playlist:).permit(:title, :content)
+    params.require(@playlist).permit(:title, :content)
   end
 
 end

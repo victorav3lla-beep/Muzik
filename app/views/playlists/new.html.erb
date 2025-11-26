@@ -2,7 +2,36 @@
 
 <p>What are you in the mood to listen to? 🎶🎵</p>
 
-<%= simple_form_for @playlist do |f| %>
-  <%= f.input :title, required: true, label: "Type the kind of music you like here" %>
-  <%= f.button :submit, 'Create Playlist', class: 'btn btn-warning' %>
+<%#= simple_form_for @playlist do |f| %>
+  <%#= f.input :title, required: true, label: "Type the kind of music you like here" %>
+  <%#= f.button :submit, 'Create Playlist', class: 'btn btn-warning' %>
+<%# end %>
+
+
+<% @chat.messages.each do |message| %>
+  <p>
+    <strong><%= message.role_string %></strong>
+    <%= raw((message.content)) %>
+  </p>
 <% end %>
+
+<div id="new_message_container">
+  <%= simple_form_for [@chat, @message] do |f| %>
+    <%= f.input :content, label: "Ask a question", required: true, placeholder: "I want to discover new muzik" %>
+    <%= f.button :submit, 'Ask LLM', class: 'btn btn-primary' %>
+  <% end %>
+</div>
+
+
+
+
+<div class="row">
+  <div class="col-md-3">
+    <h2>Chats</h2>
+    <div class="mb-4">
+      <%= button_to "New chat", playlist_chats_path(:playlist_id), class: "btn btn-primary" %>
+    </div>
+  </div>
+</div>
+
+<%= link_to "Back to playlists", playlists_path, class: "button" %>
