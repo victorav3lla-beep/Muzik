@@ -1,30 +1,35 @@
 # app/controllers/tracks_controller.rb
 class TracksController < ApplicationController
-  before_action :set_playlist
+  before_action :set_playlist, only: %i[create]
 
   def create
     @track = Track.new(track_params)
-
 
     ActiveRecord::Base.transaction do
       if @track.save
         @playlist_track = PlaylistTrack.new(playlist: @playlist, track: @track)
 
         if @playlist_track.save
-          redirect_to playlist_path(@playlist), notice: 'Track was successfully added to the playlist.'
+          redirect_to playlist_path(@playlist), notice: "Track was successfully added to the playlist."
           return
         else
-          flash.now[:alert] = 'This track is already in this playlist.'
+          flash.now[:alert] = "This track is already in this playlist."
         end
       end
     end
 
     # If we reach here, something failed - render the form again with errors
-    render 'playlists/show', status: :unprocessable_entity
+    render "playlists/show", status: :unprocessable_entity
   rescue ActiveRecord::RecordNotUnique
     # Database-level uniqueness constraint violated
-    flash.now[:alert] = 'This track is already in this playlist.'
-    render 'playlists/show', status: :unprocessable_entity
+    flash.now[:alert] = "This track is already in this playlist."
+    render "playlists/show", status: :unprocessable_entity
+  end
+
+  def destroy
+    track = Track.find(params[:id])
+    track.destroy
+    redirect_to playlist_path, status: :see_other
   end
 
   private

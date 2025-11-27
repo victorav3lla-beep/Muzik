@@ -38,9 +38,10 @@ PROMPT
       response = @ruby_llm_chat.with_instructions(instructions).ask(@message.content)
 
       Message.create(user: false, content: response.content, chat: @chat)
+      @chat.generate_title_from_first_message
 
       @response_tracks = JSON.parse(response.content)
-      @playlist = Playlist.create(title: "title",user: current_user, chat: @chat)
+      @playlist = Playlist.create(title: @chat.title ,user: current_user, chat: @chat)
 
       @response_tracks.each do |track_id, track_details|
         search_query = "#{track_details['Title']} #{track_details['Artist']}"
@@ -55,6 +56,13 @@ PROMPT
       end
 
       @chat.generate_title_from_first_message
+
+
+      #create the playlist_tracks with track id and playlist id
+      #migration reference playlist to tracks
+      #create a playlist instance
+      #create tracks based on the response
+
 
       redirect_to playlist_path(@playlist)
     else
