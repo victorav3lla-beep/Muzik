@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 
   # Bookmarks (for liking playlists and following users)
   resources :bookmarks, only: [:create, :destroy]
+  resources :tracks, only: [:destroy]
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -22,5 +23,5 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
-  get '/profile', to: 'users#show', as: :user_profile
+  get "/profile", to: "users#show", as: :user_profile
 end
