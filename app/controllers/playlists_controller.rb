@@ -1,6 +1,8 @@
 class PlaylistsController < ApplicationController
   def new
     @playlist = Playlist.new
+    @chat = Chat.create(user: current_user)
+    @message = Message.new
   end
 
   def create
@@ -12,7 +14,7 @@ class PlaylistsController < ApplicationController
     render :new, status: :unprocessable_entity
     end
   end
-  
+
   def index
     @playlists = current_user.playlists
   end

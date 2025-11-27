@@ -1,7 +1,7 @@
 <h1>My Playlists</h1>
 <p>Follow me!</p>
 
-<%= link_to "Create New Playlist", new_playlist_path, class: "btn btn-primary mb-3"%>
+<%= link_to "Create New Playlist", new_playlist_path(@chat), class: "btn btn-primary mb-3"%>
 
 <div class="playlist-list">
   <% @playlists.each do |playlist| %>
@@ -16,4 +16,3 @@
     </div>
   <% end %>
 </div>
-
