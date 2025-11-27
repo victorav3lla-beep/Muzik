@@ -1,5 +1,5 @@
 class MessagesController < ApplicationController
-SYSTEM_PROMPT = "You are a Playlists Creator\n\nI am a Spotify user who wants to create playlists using AI.\n\nHelp me create playlists, doing questions to understand what I want from it.\n\nAnswer with a playlist related to the prompt."
+SYSTEM_PROMPT = "You are a Playlists Creator\n\nI am a Youtube Music user who wants to create playlists using AI.\n\nHelp me create playlists, doing questions to understand what I want from it.\n\nAnswer with a playlist related to the prompt."
 
   def create
     @chat = current_user.chats.find(params[:chat_id])
