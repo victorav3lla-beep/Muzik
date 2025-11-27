@@ -43,10 +43,11 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_27_131559) do
   end
 
   create_table "playlist_tracks", force: :cascade do |t|
-    t.bigint "track_id", null: false
     t.bigint "playlist_id", null: false
+    t.bigint "track_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["playlist_id", "track_id"], name: "index_playlist_tracks_on_playlist_id_and_track_id", unique: true
     t.index ["playlist_id"], name: "index_playlist_tracks_on_playlist_id"
     t.index ["track_id"], name: "index_playlist_tracks_on_track_id"
   end
@@ -72,6 +73,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_27_131559) do
   create_table "tracks", force: :cascade do |t|
     t.string "title"
     t.string "artist"
+    t.string "url"
+    t.integer "duration"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "url"

@@ -5,6 +5,35 @@
       <%= bookmark_button(@playlist) %>
     </div>
     <%= raw((@playlist.content)) %>
+
+    <hr>
+
+    <h2>Tracks (<%= @playlist.tracks.count %>)</h2>
+    <div id="tracks" class="mb-4">
+      <% if @playlist.tracks.any? %>
+        <% @playlist.tracks.each do |track| %>
+          <div class="card mb-2 p-3">
+            <h5><%= track.title %></h5>
+            <p class="mb-1"><strong>Artist:</strong> <%= track.artist %></p>
+            <p class="mb-1"><strong>Duration:</strong> <%= track.duration %> seconds</p>
+            <p class="mb-0">
+              <%= link_to "Listen", track.url, target: "_blank", class: "btn btn-sm btn-outline-primary" %>
+            </p>
+          </div>
+        <% end %>
+      <% else %>
+        <p class="text-muted">No tracks yet. Add your first track below!</p>
+      <% end %>
+    </div>
+
+    <h3>Add a New Track</h3>
+    <%= simple_form_for [@playlist, @track] do |f| %>
+      <%= f.input :title, placeholder: "Bohemian Rhapsody" %>
+      <%= f.input :artist, placeholder: "Queen" %>
+      <%= f.input :url, placeholder: "https://open.spotify.com/track/..." %>
+      <%= f.input :duration, hint: "Duration in seconds (e.g., 354 for 5:54)" %>
+      <%= f.submit "Add Track", class: "btn btn-primary" %>
+    <% end %>
   </div>
   <%# <div class="col-md-3">
     <h2>Chats</h2>

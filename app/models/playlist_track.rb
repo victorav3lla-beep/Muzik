@@ -1,5 +1,8 @@
+# app/models/playlist_track.rb
 class PlaylistTrack < ApplicationRecord
-  belongs_to :track
   belongs_to :playlist
-  has_many :songs, dependent: :destroy
+  belongs_to :track
+
+  # Prevent the same track from being added twice to the same playlist
+  validates :track_id, uniqueness: { scope: :playlist_id, message: "is already in this playlist" }
 end
