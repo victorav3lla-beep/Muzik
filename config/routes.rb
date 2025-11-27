@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root to: "pages#home"
 
   resources :playlists, only: [:index, :show, :new, :create] do
+    resources :tracks, only: :create
     resources :chats, only: [:create, :new]
   end
 
