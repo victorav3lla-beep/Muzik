@@ -1,26 +1,27 @@
 class MessagesController < ApplicationController
-SYSTEM_PROMPT = "You are a specialized Playlists Creator and curator\n\nI am a Spotify user who wants to create playlists using AI with a basic promp.\n\nHelp me create a playlist with tracks related to the topic I am giving you in the prompt.\n\nAnswer with a playlist with following format:
+SYSTEM_PROMPT = <<~PROMPT
+You are a specialized Playlists Creator and curator\n\nI am a Youtube user who wants to create playlists using AI with a basic promp, and will use your response to create a playlist in my app and embed the url's.\n\nHelp me create a playlist with tracks related to the topic I am giving you in the prompt.\n\nAnswer with a playlist of 10 to 15 tracks with following format:
 {
-  track_id: {
-    Title: track_title
-    Artist: track_artist
-    url: track_url
-    Duration: track_duration
-    }
-  track_2: {
-    Title: track_title
-    Artist: track_artist
-    url: track_url
-    Duration: track_duration
-    }
-  track_3: {
-    Title: track_title
-    Artist: track_artist
-    url: track_url
-    Duration: track_duration
-    }
-  }
-}."
+  "track_id": {
+    "Title": "track_title",
+    "Artist": "track_artist",
+    "Url": "track_url",
+    "Duration": "track_duration",
+    },
+  "track_id": {
+    "Title": "track_title",
+    "Artist": "track_artist",
+    "Url": "track_url",
+    "Duration": "track_duration",
+    },
+  "track_id": {
+    "Title": "track_title",
+    "Artist": "track_artist",
+    "Url": "track_url",
+    "Duration": "track_duration",
+    },
+}
+PROMPT
 
   def create
     @chat = current_user.chats.find(params[:chat_id])
@@ -38,11 +39,15 @@ SYSTEM_PROMPT = "You are a specialized Playlists Creator and curator\n\nI am a S
 
       Message.create(user: false, content: response.content, chat: @chat)
 
-      @response_playlist = response.content
-      @playlist = Playlist.create(title: "title",user: current_user)
+      @response_tracks = JSON.parse(response.content)
+      @playlist = Playlist.create(title: "title",user: current_user, chat: @chat)
 
-      Track.create(title: @response_playlist.title, artist: @response_playlist.artist, url: @response_playlist.url, duration: @response_playlist.duration)
+      @response_tracks.each do |track_id, track_details|
+        track = Track.create(title: track_details["Title"], artist: track_details["Artist"], url: track_details["Url"], duration: track_details["Duration"])
+        PlaylistTrack.create(playlist: @playlist, track: track)
+      end
 
+      
 
       #create the playlist_tracks with track id and playlist id
       #migration reference playlist to tracks

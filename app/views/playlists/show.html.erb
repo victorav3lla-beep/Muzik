@@ -6,21 +6,21 @@
     </div>
     <%= raw((@playlist.content)) %>
   </div>
-  <div class="col-md-3">
+  <%# <div class="col-md-3">
     <h2>Chats</h2>
     <div class="mb-4">
-      <% if @playlist.chats.any? %>
+      <% if @playlist.tracks.any? %>
         <ul>
-          <% @playlist.chats.each do |chat| %>
-            <li><%= link_to chat.title, chat_path(chat) %></li>
-          <% end %>
+          <%# @playlist.tracks.each do |chat| %>
+            <li><%#= link_to chat.title, chat_path(chat) %></li>
+          <%# end %>
         </ul>
-      <% else %>
-        There are no chats yet.
-      <% end %>
-      <%# <%= button_to "New chat", playlist_chats_path(@playlist), class: "btn btn-primary" %> %>
-    </div>
-  </div>
+      <%# else %>
+        <%# There are no chats yet. %>
+      <%# end %>
+      <%# <%= button_to "New chat", playlist_chats_path(@playlist), class: "btn btn-primary" %>
+    <%# </div>
+  </div> %>
 </div>
 
 <%= link_to "Back to playlists", playlists_path, class: "button" %>
