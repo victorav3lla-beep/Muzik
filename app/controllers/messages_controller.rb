@@ -1,5 +1,26 @@
 class MessagesController < ApplicationController
-SYSTEM_PROMPT = "You are a Playlists Creator\n\nI am a Spotify user who wants to create playlists using AI.\n\nHelp me create playlists, doing questions to understand what I want from it.\n\nAnswer with a playlist related to the prompt."
+SYSTEM_PROMPT = "You are a specialized Playlists Creator and curator\n\nI am a Spotify user who wants to create playlists using AI with a basic promp.\n\nHelp me create a playlist with tracks related to the topic I am giving you in the prompt.\n\nAnswer with a playlist with following format:
+{
+  track_id: {
+    Title: track_title
+    Artist: track_artist
+    url: track_url
+    Duration: track_duration
+    }
+  track_2: {
+    Title: track_title
+    Artist: track_artist
+    url: track_url
+    Duration: track_duration
+    }
+  track_3: {
+    Title: track_title
+    Artist: track_artist
+    url: track_url
+    Duration: track_duration
+    }
+  }
+}."
 
   def create
     @chat = current_user.chats.find(params[:chat_id])
@@ -17,12 +38,24 @@ SYSTEM_PROMPT = "You are a Playlists Creator\n\nI am a Spotify user who wants to
 
       Message.create(user: false, content: response.content, chat: @chat)
 
+      @response_playlist = response.content
+      @playlist = Playlist.create(title: "title",user: current_user)
+
+      Track.create(title: @response_playlist.title, artist: @response_playlist.artist, url: @response_playlist.url, duration: @response_playlist.duration)
+
+
+      #create the playlist_tracks with track id and playlist id
+      #migration reference playlist to tracks
+      #create a playlist instance
+      #create tracks based on the response
+
       @chat.generate_title_from_first_message
 
-      respond_to do |format|
-        format.turbo_stream
-        format.html { redirect_to chat_path(@chat)}
-      end
+      # respond_to do |format|
+      #   format.turbo_stream
+      #   format.html { redirect_to chat_path(@chat)}
+      # end
+      redirect_to playlist_path(@playlist)
     else
       respond_to do |format|
         format.turbo_stream { render turbo_stream: turbo_stream.replace('new_message',
