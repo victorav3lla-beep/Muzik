@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   root to: "pages#home"
 
-  resources :playlists, only: [:index, :show, :new, :create] do
+  resources :playlists, only: [:index, :show, :new, :create, :destroy] do
     resources :tracks, only: :create
     resources :chats, only: [:create, :new]
   end

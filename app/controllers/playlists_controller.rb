@@ -9,9 +9,9 @@ class PlaylistsController < ApplicationController
     @playlist = current_user.playlists.new(playlist_params)
     # @playlist.made = RubyLLM.chat.ask("Generate a playlist from this text: #{@playlist.query}").content
     if @playlist.save
-    redirect_to playlist_path(@playlist), notice: "Playlist was successfully created! WOOOOO!!🎉🎉"
+      redirect_to playlist_path(@playlist), notice: "Playlist was successfully created! WOOOOO!!🎉🎉"
     else
-    render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -24,10 +24,15 @@ class PlaylistsController < ApplicationController
     @track = Track.new # Initialize empty track for the form
   end
 
+  def destroy
+    playlist = Playlist.find(params[:id])
+    playlist.destroy
+    redirect_to playlists_path, status: :see_other
+  end
+
   private
 
   def playlist_params
     params.require(:playlist).permit(:title, :content)
   end
-
 end

@@ -3,7 +3,7 @@
     <div class="d-flex justify-content-between align-items-center mb-3">
       <h1><%= @playlist.title %></h1>
       <%= bookmark_button(@playlist) %>
-    </div
+    </div>
     <%= raw((@playlist.content)) %>
     <hr>
     <% video_ids = @playlist.tracks.map { |t| t.url.split("v=").last }.join(",") %>
@@ -58,20 +58,19 @@
       <%= f.submit "Add Track", class: "btn btn-primary" %>
     <% end %>
   </div>
-  <%# <div class="col-md-3">
+  <div class="col-md-3">
     <h2>Chats</h2>
     <div class="mb-4">
       <% if @playlist.tracks.any? %>
-  <ul>
-    <%# @playlist.tracks.each do |chat| %>
-      <li><%#= link_to chat.title, chat_path(chat) %></li>
-      <%# end %>
-    </ul>
-    <%# else %>
-    <%# There are no chats yet. %>
-    <%# end %>
-    <%# <%= button_to "New chat", playlist_chats_path(@playlist), class: "btn btn-primary" %>
-    <%# </div>
-  </div> %>
+        <ul>
+          <% @playlist.tracks.each do |playlist| %>
+            <li><%= link_to playlist.title, playlist_path(playlist) %> </li>
+          <% end %>
+        </ul>
+      <% else %>
+        There are no chats yet.
+      <% end %>
+      <%= link_to "Create New Playlist", new_playlist_path(@chat), class: "btn btn-primary mb-3"%>
+    </div>
   </div>
   <%= link_to "Back to playlists", playlists_path, class: "button" %>
