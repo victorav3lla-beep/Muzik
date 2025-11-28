@@ -2,7 +2,7 @@
 @import "config/fonts";
 @import "config/colors";
 
-// 1. Define your custom color palette
+// 1. Our colors
 $primary: #ff953d;
 $secondary: #601fc1;
 $info: #48596a;
@@ -11,7 +11,7 @@ $body-color: #ffffff;
 $purple: #601fc1;
 $orange: #ff953d;
 
-// 2. Optional: Adjust link colors
+// 2. Link colors
 $link-color: $primary;
 $link-hover-color: lighten($primary, 10%);
 
@@ -25,12 +25,12 @@ body {
   min-height: 100vh;
 }
 
-// 5. Custom Utilities for your theme
+// 5. Custom Utilities
 .bg-accent {
   background-color: $secondary;
 }
 
-// Enhanced Card Designs
+// Card Designs
 .card-custom {
   background: rgba(lighten($body-bg, 8%), 0.85);
   backdrop-filter: blur(10px);
@@ -64,7 +64,7 @@ body {
   }
 }
 
-// Premium Gradient Cards
+// Gradient Cards
 .card-glow {
   background: linear-gradient(135deg, rgba($purple, 0.9) 0%, rgba($orange, 0.8) 100%);
   color: #fff;
@@ -183,7 +183,7 @@ h1, h2, h3, h4, h5, h6,
   text-transform: uppercase;
 }
 
-// Music-themed text styles
+// Text styles H1
 .text-beat {
   font-family: $headers-font;
   font-weight: 900;
@@ -220,14 +220,14 @@ h1, h2, h3, h4, h5, h6,
   letter-spacing: -0.01em;
 }
 
-// Badge typography
+// Typography 2
 .badge {
   font-family: $body-font;
   font-weight: 600;
   letter-spacing: 0.02em;
 }
 
-// Enhanced Navbar with Glassmorphism
+// Enhanced Navbar
 .navbar {
   background: rgba($body-bg, 0.75) !important;
   backdrop-filter: blur(20px) saturate(180%);

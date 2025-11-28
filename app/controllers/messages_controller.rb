@@ -38,15 +38,24 @@ PROMPT
       response = @ruby_llm_chat.with_instructions(instructions).ask(@message.content)
 
       Message.create(user: false, content: response.content, chat: @chat)
+      @chat.generate_title_from_first_message
 
       @response_tracks = JSON.parse(response.content)
-      @playlist = Playlist.create(title: "title",user: current_user, chat: @chat)
+      @playlist = Playlist.create(title: @chat.title ,user: current_user, chat: @chat)
 
       @response_tracks.each do |track_id, track_details|
-        track = Track.create(title: track_details["Title"], artist: track_details["Artist"], url: track_details["Url"], duration: track_details["Duration"])
+        search_query = "#{track_details['Title']} #{track_details['Artist']}"
+        youtube_url = YoutubeSearchService.search(search_query)
+        track = Track.create(
+          title: track_details["Title"],
+          artist: track_details["Artist"],
+          url: youtube_url || track_details["Url"],
+          duration: track_details["Duration"]
+        )
         PlaylistTrack.create(playlist: @playlist, track: track)
       end
 
+      @chat.generate_title_from_first_message
 
 
       #create the playlist_tracks with track id and playlist id
@@ -54,12 +63,7 @@ PROMPT
       #create a playlist instance
       #create tracks based on the response
 
-      @chat.generate_title_from_first_message
 
-      # respond_to do |format|
-      #   format.turbo_stream
-      #   format.html { redirect_to chat_path(@chat)}
-      # end
       redirect_to playlist_path(@playlist)
     else
       respond_to do |format|
