@@ -532,6 +532,62 @@ html {
   }
 }
 
+// CURSOR STYLES
+body {
+  cursor: none;
+}
+
+a, button, .btn, .card-custom, input, textarea, select {
+  cursor: none !important;
+}
+
+.custom-cursor-dot,
+.custom-cursor-circle {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 10000;
+  mix-blend-mode: difference;
+}
+
+.custom-cursor-dot {
+  width: 8px;
+  height: 8px;
+  background: $orange;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: transform 0.15s ease, opacity 0.3s ease;
+  box-shadow: 0 0 10px rgba($orange, 0.6);
+}
+
+.custom-cursor-circle {
+  width: 40px;
+  height: 40px;
+  border: 2px solid rgba($orange, 0.5);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: transform 0.3s cubic-bezier(0.75, -0.5, 0.25, 1.5),
+              border-color 0.3s ease;
+  backdrop-filter: blur(2px);
+}
+
+// Mobile devices - show normal cursor
+@media (hover: none) and (pointer: coarse) {
+  body {
+    cursor: auto !important;
+  }
+
+  .custom-cursor-dot,
+  .custom-cursor-circle {
+    display: none;
+  }
+
+  a, button, .btn, .card-custom, input, textarea, select {
+    cursor: pointer !important;
+  }
+}
+
 // Your CSS partials
 @import "components/index";
 @import "pages/index";

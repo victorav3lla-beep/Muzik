@@ -10,7 +10,11 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
+  <body data-controller="custom-cursor">
+    <!-- Custom Cursor Elements -->
+    <div class="custom-cursor-dot" data-custom-cursor-target="dot"></div>
+    <div class="custom-cursor-circle" data-custom-cursor-target="circle"></div>
+
     <%= render "shared/navbar" %>
     <%= yield %>
     <%= render "shared/footer" %>
