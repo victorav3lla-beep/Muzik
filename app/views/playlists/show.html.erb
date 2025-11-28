@@ -3,9 +3,8 @@
     <div class="d-flex justify-content-between align-items-center mb-3">
       <h1><%= @playlist.title %></h1>
       <%= bookmark_button(@playlist) %>
-    </div>
+    </div
     <%= raw((@playlist.content)) %>
-
     <hr>
     <% video_ids = @playlist.tracks.map { |t| t.url.split("v=").last }.join(",") %>
 
@@ -40,13 +39,16 @@
             <p class="mb-0">
               <%= link_to "Listen", track.url, target: "_blank", class: "btn btn-sm btn-outline-primary" %>
             </p>
+            <p class="mb-0">
+              <%= link_to "Delete", track_path(track), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"},
+              class: "btn btn-danger" %>
+            </p>
           </div>
         <% end %>
       <% else %>
         <p class="text-muted">No tracks yet. Add your first track below!</p>
       <% end %>
     </div>
-
     <h3>Add a New Track</h3>
     <%= simple_form_for [@playlist, @track] do |f| %>
       <%= f.input :title, placeholder: "Bohemian Rhapsody" %>
@@ -60,17 +62,16 @@
     <h2>Chats</h2>
     <div class="mb-4">
       <% if @playlist.tracks.any? %>
-        <ul>
-          <%# @playlist.tracks.each do |chat| %>
-            <li><%#= link_to chat.title, chat_path(chat) %></li>
-          <%# end %>
-        </ul>
-      <%# else %>
-        <%# There are no chats yet. %>
+  <ul>
+    <%# @playlist.tracks.each do |chat| %>
+      <li><%#= link_to chat.title, chat_path(chat) %></li>
       <%# end %>
-      <%# <%= button_to "New chat", playlist_chats_path(@playlist), class: "btn btn-primary" %>
+    </ul>
+    <%# else %>
+    <%# There are no chats yet. %>
+    <%# end %>
+    <%# <%= button_to "New chat", playlist_chats_path(@playlist), class: "btn btn-primary" %>
     <%# </div>
   </div> %>
-</div>
-
-<%= link_to "Back to playlists", playlists_path, class: "button" %>
+  </div>
+  <%= link_to "Back to playlists", playlists_path, class: "button" %>

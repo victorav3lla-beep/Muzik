@@ -1,6 +1,7 @@
 class MessagesController < ApplicationController
 SYSTEM_PROMPT = <<~PROMPT
 IMPORTANT: Only generate YouTube videos that are embeddable and playable in an iframe. You are a specialized Playlists Creator and curator\n\nI am a Youtube user who wants to create playlists using AI with a basic promp, and will use your response to create a playlist in my app and embed the url's.\n\nHelp me create a playlist with tracks related to the topic I am giving you in the prompt.\n\nOnly return YouTube videos that are embeddable and can be played in an iframe Answer with a playlist of 10 to 15 tracks with following format:
+You are a specialized Playlists Creator and curator\n\nI am a Youtube Music user who wants to create playlists using AI with a basic promp, and will use your response to create a playlist in my app and embed the url's.\n\nHelp me create a playlist with tracks related to the topic I am giving you in the prompt.\n\nAnswer with a playlist of 10 to 15 tracks with following format:
 {
   "track_id": {
     "Title": "track_title",
@@ -38,9 +39,10 @@ PROMPT
       response = @ruby_llm_chat.with_instructions(instructions).ask(@message.content)
 
       Message.create(user: false, content: response.content, chat: @chat)
+      @chat.generate_title_from_first_message
 
       @response_tracks = JSON.parse(response.content)
-      @playlist = Playlist.create(title: "title",user: current_user, chat: @chat)
+      @playlist = Playlist.create(title: @chat.title ,user: current_user, chat: @chat)
 
       @response_tracks.each do |track_id, track_details|
         search_query = "#{track_details['Title']} #{track_details['Artist']}"
@@ -55,6 +57,13 @@ PROMPT
       end
 
       @chat.generate_title_from_first_message
+
+
+      #create the playlist_tracks with track id and playlist id
+      #migration reference playlist to tracks
+      #create a playlist instance
+      #create tracks based on the response
+
 
       redirect_to playlist_path(@playlist)
     else
