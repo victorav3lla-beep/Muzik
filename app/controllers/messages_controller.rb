@@ -115,7 +115,7 @@ PROMPT
 
 
             respond_to do |format|
-          format.turbo_stream { render turbo_stream: turbo_stream.replace('new_track',
+          format.turbo_stream { render turbo_stream: turbo_stream.append('track',
                                       partial: 'playlists/track_template',
                                       locals: { chat: @chat, message: @message }) }
           format.html { redirect_to playlist_path(@playlist) }

@@ -1,0 +1,3 @@
+<%= turbo_stream.append "incoming_tracks" do %>
+  <%= render "playlists/track_template", tracks: @chat.messages.last %>
+<% end %>
