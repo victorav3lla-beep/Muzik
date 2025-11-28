@@ -1,6 +1,6 @@
 class MessagesController < ApplicationController
 SYSTEM_PROMPT = <<~PROMPT
-You are a specialized Playlists Creator and curator\n\nI am a Youtube user who wants to create playlists using AI with a basic promp, and will use your response to create a playlist in my app and embed the url's.\n\nHelp me create a playlist with tracks related to the topic I am giving you in the prompt.\n\nAnswer with a playlist of 10 to 15 tracks with following format:
+You are a specialized Playlists Creator and curator\n\nI am a Youtube Music user who wants to create playlists using AI with a basic promp, and will use your response to create a playlist in my app and embed the url's.\n\nHelp me create a playlist with tracks related to the topic I am giving you in the prompt.\n\nAnswer with a playlist of 10 to 15 tracks with following format:
 {
   "track_id": {
     "Title": "track_title",
