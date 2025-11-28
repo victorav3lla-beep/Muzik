@@ -18,7 +18,7 @@
     <div class="mb-4">
       <% if @user_playlists.present? %>
         <ul>
-          <% @user_playlists.each do |playlist| %>
+          <% @playlist.tracks.each do |playlist| %>
             <li><%= link_to playlist.title, playlist_path(playlist) %> </li>
           <% end %>
         </ul>
