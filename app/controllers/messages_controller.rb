@@ -76,7 +76,7 @@ PROMPT
             duration: track_details["Duration"]
             )
             PlaylistTrack.create(playlist: @playlist, track: track)
-          end
+        end
 
           @chat.generate_title_from_first_message
 
@@ -115,12 +115,13 @@ PROMPT
 
 
             respond_to do |format|
-        format.turbo_stream { render turbo_stream: turbo_stream.replace('new_message',
-                                      partial: 'messages/form',
+          format.turbo_stream { render turbo_stream: turbo_stream.replace('new_track',
+                                      partial: 'playlists/track_template',
                                       locals: { chat: @chat, message: @message }) }
-        format.html { redirect_to playlist_path(@playlist) }
+          format.html { redirect_to playlist_path(@playlist) }
         end
       end
+    end
     else
       respond_to do |format|
         format.turbo_stream { render turbo_stream: turbo_stream.replace('new_message',
