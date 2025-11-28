@@ -1,4 +1,117 @@
-<h1>Welcome to Muzik</h1>
-<p>Playlist your day with AI</p>
+<!-- app/views/pages/home.html.erb -->
 
-<%= link_to "Go to my playlists", playlists_path, class: "button" %>
+<div class="container py-5">
+  <!-- Hero Section -->
+  <div class="text-center mb-5 animate__animated animate__fadeIn">
+    <h1 class="display-2 fw-bold mb-3 text-shadow-strong" style="font-weight: 900;">
+      Welcome to <span class="text-gradient text-glow">Muzik</span>
+    </h1>
+    <p class="lead mb-4 text-shadow-soft" style="font-size: 1.4rem; opacity: 0.95; max-width: 700px; margin: 0 auto; font-weight: 300;">
+      Your AI-powered playlist curator. Create, discover, and share music like never before.
+    </p>
+    <div class="d-flex justify-content-center gap-3 mb-4">
+      <span class="badge rounded-pill" style="background: linear-gradient(135deg, #ff953d, #601fc1); padding: 0.75rem 1.5rem; font-size: 0.8rem;">
+        <i class="fas fa-robot me-2"></i>AI & Love - Powered
+      </span>
+      <span class="badge rounded-pill" style="background: linear-gradient(75deg, #601fc1, #ff953d); padding: 0.75rem 1.5rem; font-size: 0.8rem;">
+        <i class="fas fa-robot me-2"></i>Smart Curation
+      </span>
+    </div>
+  </div>
+
+  <!-- Quick Actions Grid -->
+  <div class="row justify-content-center g-4 mb-5">
+    <!-- Card 1: Create a new Playlist -->
+    <div class="col-lg-4 col-md-6">
+      <div class="card card-custom h-100 text-center" style="animation: fadeInUp 0.6s ease-out;">
+        <div class="card-body d-flex flex-column justify-content-center p-5">
+          <div class="mb-4" style="position: relative;">
+          </div>
+          <h4 class="card-title fw-bold mb-3" style="font-size: 1.5rem; letter-spacing: -0.02em;">Create a Playlist</h4>
+          <p class="card-text mb-4" style="opacity: 0.85; font-weight: 300; line-height: 1.6;">
+            Craft the perfect playlist for any mood or moment using the power by SSAUNIER our smart AI.
+          </p>
+          <%= link_to new_playlist_path, class: "btn btn-primary mt-auto mx-auto", style: "width: fit-content;" do %>
+            <i class="fas fa-plus me-2"></i>New Playlist
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2: Browse existing Playlists -->
+    <div class="col-lg-4 col-md-6">
+      <div class="card card-custom h-100 text-center" style="animation: fadeInUp 0.6s ease-out 0.2s; animation-fill-mode: both;">
+        <div class="card-body d-flex flex-column justify-content-center p-5">
+          <div class="mb-4" style="position: relative;">
+            <i class="fas fa-music fa-4x text-primary hvr-glow"></i>
+            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80px; height: 80px; background: radial-gradient(circle, rgba(96, 31, 193, 0.2) 0%, transparent 70%); border-radius: 50%; animation: pulse 2s infinite 0.5s;"></div>
+          </div>
+          <h4 class="card-title fw-bold mb-3" style="font-size: 1.5rem; letter-spacing: -0.02em;">Browse Playlists</h4>
+          <p class="card-text mb-4" style="opacity: 0.85; font-weight: 300; line-height: 1.6;">
+            Explore your collection of playlists and find the perfect soundtrack for your day.
+          </p>
+          <%= link_to playlists_path, class: "btn btn-outline-primary mt-auto mx-auto", style: "width: fit-content;" do %>
+            <i class="fas fa-list me-2"></i>My Playlists
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Features Section -->
+  <div class="row justify-content-center mt-5">
+    <div class="col-lg-8">
+      <div class="text-center mb-5">
+        <h3 class="fw-bold mb-2 text-accent" style="font-size: 0.9rem; color: rgba(255, 255, 255, 0.6);">Features</h3>
+        <h2 class="display-5 fw-bold text-shadow-soft">Why Choose <span class="text-gradient">Muzik</span>?</h2>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="text-center p-4" style="background: rgba(255, 255, 255, 0.05); border-radius: 18px; backdrop-filter: blur(10px); border: 1px solid rgba(255, 149, 61, 0.1); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='rgba(255, 149, 61, 0.3)'" onmouseout="this.style.transform=''; this.style.borderColor='rgba(255, 149, 61, 0.1)'">
+            <i class="fas fa-brain fa-3x mb-3" style="color: #ff953d; filter: drop-shadow(0 0 10px rgba(255, 149, 61, 0.4));"></i>
+            <h5 class="fw-bold mb-2" style="letter-spacing: -0.01em;">Love Powered</h5>
+            <p class="mb-0" style="opacity: 0.8; font-weight: 300; font-size: 0.95rem; line-height: 1.6;">Algorithms curate perfect playlists</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="text-center p-4" style="background: rgba(255, 255, 255, 0.05); border-radius: 18px; backdrop-filter: blur(10px); border: 1px solid rgba(96, 31, 193, 0.1); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='rgba(96, 31, 193, 0.3)'" onmouseout="this.style.transform=''; this.style.borderColor='rgba(96, 31, 193, 0.1)'">
+            <i class="fas fa-bolt fa-3x mb-3" style="color: #601fc1; filter: drop-shadow(0 0 10px rgba(96, 31, 193, 0.4));"></i>
+            <h5 class="fw-bold mb-2" style="letter-spacing: -0.01em;">Lightning Fast</h5>
+            <p class="mb-0" style="opacity: 0.8; font-weight: 300; font-size: 0.95rem; line-height: 1.6;">Create playlists in seconds</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="text-center p-4" style="background: rgba(255, 255, 255, 0.05); border-radius: 18px; backdrop-filter: blur(10px); border: 1px solid rgba(255, 149, 61, 0.1); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.borderColor='rgba(255, 149, 61, 0.3)'" onmouseout="this.style.transform=''; this.style.borderColor='rgba(255, 149, 61, 0.1)'">
+            <i class="fas fa-heart fa-3x mb-3" style="color: #ff953d; filter: drop-shadow(0 0 10px rgba(255, 149, 61, 0.4));"></i>
+            <h5 class="fw-bold mb-2" style="letter-spacing: -0.01em;">Personalized</h5>
+            <p class="mb-0" style="opacity: 0.8; font-weight: 300; font-size: 0.95rem; line-height: 1.6;">Tailored to your unique taste</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+}
+</style>
