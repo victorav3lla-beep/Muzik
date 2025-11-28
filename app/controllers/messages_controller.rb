@@ -23,6 +23,7 @@ IMPORTANT: Only generate YouTube videos that are embeddable and playable in an i
 }
 PROMPT
 
+
   def create
     @chat = current_user.chats.find(params[:chat_id])
     # @playlist = @chat.playlist

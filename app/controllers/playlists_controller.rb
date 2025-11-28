@@ -3,6 +3,7 @@ class PlaylistsController < ApplicationController
     @playlist = Playlist.new
     @chat = Chat.create(user: current_user)
     @message = Message.new
+    @user_playlists = Playlist.where(user: current_user)
   end
 
   def create
@@ -22,6 +23,7 @@ class PlaylistsController < ApplicationController
   def show
     @playlist = Playlist.find(params[:id])
     @track = Track.new # Initialize empty track for the form
+    @user_playlists = Playlist.where(user: current_user)
   end
 
   def destroy
