@@ -1,11 +1,459 @@
 // Graphical variables
 @import "config/fonts";
 @import "config/colors";
-@import "config/bootstrap_variables";
 
-// External libraries
+// 1. Our colors
+$primary: #ff953d;
+$secondary: #601fc1;
+$info: #48596a;
+$body-bg: #09203e;
+$body-color: #ffffff;
+$purple: #601fc1;
+$orange: #ff953d;
+
+// 2. Link colors
+$link-color: $primary;
+$link-hover-color: lighten($primary, 10%);
+
+// 3. Import Bootstrap (MUST be after variable definitions)
 @import "bootstrap";
-@import "font-awesome";
+
+// 4. Gradient Background
+body {
+  background: linear-gradient(135deg, $purple 0%, $body-bg 50%, darken($orange, 20%) 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+// 5. Custom Utilities
+.bg-accent {
+  background-color: $secondary;
+}
+
+// Card Designs
+.card-custom {
+  background: rgba(lighten($body-bg, 8%), 0.85);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba($purple, 0.3);
+  color: white;
+  transition: all 0.3s ease;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba($purple, 0.15);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba($orange, 0.1), transparent);
+    transition: left 0.5s;
+  }
+
+  &:hover {
+    transform: translateY(-8px);
+    border-color: rgba($orange, 0.6);
+    box-shadow: 0 12px 48px rgba($orange, 0.25), 0 0 20px rgba($purple, 0.2);
+
+    &::before {
+      left: 100%;
+    }
+  }
+}
+
+// Gradient Cards
+.card-glow {
+  background: linear-gradient(135deg, rgba($purple, 0.9) 0%, rgba($orange, 0.8) 100%);
+  color: #fff;
+  border-radius: 20px;
+  border: none;
+  box-shadow: 0 15px 35px rgba($purple, 0.4), 0 5px 15px rgba($orange, 0.2);
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  position: relative;
+  overflow: hidden;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+
+  &:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 50px rgba($purple, 0.5), 0 10px 25px rgba($orange, 0.3);
+
+    &::after {
+      opacity: 1;
+    }
+  }
+
+  .card-body {
+    padding: 2rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  .card-text {
+    font-size: 1rem;
+    line-height: 1.5;
+    opacity: 0.95;
+  }
+
+  .btn-glow {
+    background-color: rgba(255, 255, 255, 0.95);
+    color: $purple;
+    font-weight: bold;
+    border: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+
+    &:hover {
+      background-color: #fff;
+      color: $orange;
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    }
+  }
+}
+
+.text-gradient {
+  background: -webkit-linear-gradient(45deg, $primary, $secondary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+// Enhanced Typography System
+body {
+  font-family: $body-font;
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: -0.01em;
+}
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  font-family: $headers-font;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.display-1, .display-2, .display-3, .display-4, .display-5, .display-6 {
+  font-family: $headers-font;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+// Fancy Text Effects
+.text-glow {
+  text-shadow: 0 0 5px rgba($orange, 0.5), 0 0 10px rgba($purple, 0.1);
+}
+
+.text-shadow-strong {
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.text-shadow-soft {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+// Accent Text
+.text-accent {
+  font-family: $accent-font;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+// Text styles H1
+.text-beat {
+  font-family: $headers-font;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  background: linear-gradient(75deg, $orange, $purple, $orange);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 3s linear infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 0% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+// Elegant lead text
+.lead {
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.7;
+}
+
+// Card titles enhancement
+.card-title {
+  font-family: $headers-font;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+// Typography 2
+.badge {
+  font-family: $body-font;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+// Enhanced Navbar
+.navbar {
+  background: rgba($body-bg, 0.75) !important;
+  backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid rgba($purple, 0.2);
+  box-shadow: 0 4px 30px rgba($purple, 0.1);
+  transition: all 0.3s ease;
+
+  .navbar-brand {
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: scale(1.1) rotate(-5deg);
+    }
+
+    i {
+      filter: drop-shadow(0 0 10px rgba($orange, 0.5));
+    }
+  }
+
+  .nav-link {
+    color: $body-color;
+    transition: all 0.3s ease;
+    position: relative;
+    padding: 0.5rem 1rem;
+    margin: 0 0.25rem;
+    border-radius: 12px;
+
+    &::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, $orange, $purple);
+      transform: translateX(-50%);
+      transition: width 0.3s ease;
+    }
+
+    &:hover {
+      color: $orange;
+      background: rgba($orange, 0.1);
+
+      &::before {
+        width: 80%;
+      }
+    }
+
+    &.active {
+      color: $orange;
+      font-weight: bold;
+      background: rgba($orange, 0.15);
+      box-shadow: 0 0 15px rgba($orange, 0.3);
+    }
+  }
+
+  .dropdown-menu {
+    background: rgba($body-bg, 0.95);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba($purple, 0.3);
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba($purple, 0.2);
+
+    .dropdown-item {
+      color: $body-color;
+      transition: all 0.2s ease;
+      border-radius: 8px;
+      margin: 0.25rem 0.5rem;
+
+      &:hover {
+        background: rgba($orange, 0.2);
+        color: $orange;
+        transform: translateX(5px);
+      }
+    }
+  }
+
+  .avatar {
+    border: 2px solid $orange;
+    box-shadow: 0 0 15px rgba($orange, 0.4);
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 25px rgba($orange, 0.6);
+    }
+  }
+}
+
+// Enhanced Buttons
+.btn {
+  border-radius: 50px;
+  font-weight: 600;
+  padding: 12px 28px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  border: none;
+  font-family: $body-font;
+  letter-spacing: 0.01em;
+  font-size: 0.95rem;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+  }
+
+  &:hover::before {
+    width: 300px;
+    height: 300px;
+  }
+
+  &.btn-primary {
+    background: linear-gradient(135deg, $orange 0%, darken($orange, 10%) 100%);
+    box-shadow: 0 4px 15px rgba($orange, 0.4);
+
+    &:hover {
+      background: linear-gradient(135deg, lighten($orange, 5%) 0%, $orange 100%);
+      box-shadow: 0 6px 25px rgba($orange, 0.6);
+      transform: translateY(-2px);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+
+  &.btn-outline-primary {
+    border: 2px solid $orange;
+    color: $orange;
+    background: transparent;
+
+    &:hover {
+      background: $orange;
+      color: white;
+      box-shadow: 0 6px 25px rgba($orange, 0.4);
+      transform: translateY(-2px);
+    }
+  }
+}
+
+.avatar-profile {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 4px solid $orange;
+  object-fit: cover;
+  box-shadow: 0 8px 30px rgba($orange, 0.4), 0 0 20px rgba($purple, 0.3);
+  transition: all 0.3s ease;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    padding: 4px;
+    background: linear-gradient(45deg, $orange, $purple);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 40px rgba($orange, 0.6), 0 0 30px rgba($purple, 0.5);
+
+    &::after {
+      opacity: 1;
+    }
+  }
+}
+
+// Additional Utilities
+.container-fluid {
+  position: relative;
+  z-index: 1;
+}
+
+// Animated Icons
+i.fa-headphones-alt,
+i.fa-plus-circle,
+i.fa-music,
+i.fa-compact-disc {
+  transition: all 0.3s ease;
+}
+
+// Card Footer Enhancement
+.card-footer {
+  background: rgba($purple, 0.1) !important;
+  border-top: 1px solid rgba($purple, 0.2) !important;
+}
+
+// Link Enhancements
+a.text-white {
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: $orange !important;
+  }
+}
+
+// Text Utilities
+.text-primary {
+  color: $orange !important;
+}
+
+.text-secondary {
+  color: $purple !important;
+}
+
+// Smooth Scrolling
+html {
+  scroll-behavior: smooth;
+}
 
 // Your CSS partials
 @import "components/index";
