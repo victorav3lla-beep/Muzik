@@ -114,5 +114,12 @@
       <%= link_to "Create New Playlist", new_playlist_path(@chat), class: "btn btn-primary mb-3"%>
     </div>
   </div>
+
+   <div id="new_message_container">
+    <%= simple_form_for [@chat, @message] do |f| %>
+      <%= f.input :content, label: false, required: true, placeholder: "I want to discover new muzik" %>
+      <%= f.button :submit, 'Add to Playlist', class: 'btn btn-primary' %>
+    <% end %>
+  </div>
   <%= link_to "Back to playlists", playlists_path, class: "btn btn-outline-primary mt-3" %>
 </div>

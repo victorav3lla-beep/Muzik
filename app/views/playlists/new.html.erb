@@ -7,17 +7,13 @@
         <h1 class="mb-3">New playlist</h1>
         <p class="mb-4">What are you in the mood to listen to? 🎶🎵</p>
 
-        <% @chat.messages.each do |message| %>
-          <p>
-            <strong><%= message.role_string %></strong>
-            <%= raw(message.content) %>
-          </p>
-        <% end %>
-
-        <div id="new_message_container" class="mt-3">
-          <%= simple_form_for [@chat, @message] do |f| %>
-            <%= f.input :content, label: "", required: true, placeholder: "I want to discover new muzik" %>
-            <%= f.button :submit, 'Create Playlist', class: 'btn btn-primary mt-2' %>
+  <div class="col-md-3">
+    <h2>Chats</h2>
+    <div class="mb-4">
+      <% if @user_playlists.present? %>
+        <ul>
+          <% @playlist.tracks.each do |playlist| %>
+            <li><%= link_to playlist.title, playlist_path(playlist) %> </li>
           <% end %>
         </div>
       </div>
