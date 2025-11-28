@@ -6,7 +6,23 @@
     </div
     <%= raw((@playlist.content)) %>
     <hr>
+    <% video_ids = @playlist.tracks.map { |t| t.url.split("v=").last }.join(",") %>
+
     <h2>Tracks (<%= @playlist.tracks.count %>)</h2>
+
+    <button class="btn btn-primary mb-3"
+        onclick="document.getElementById('player').style.display = 'block'">
+       ▶️ Play All Inside App
+    </button>
+
+<div id="player" style="display:none; margin-bottom: 20px;">
+  <iframe width="100%" height="360"
+          src="https://www.youtube.com/embed?playlist=<%= video_ids %>&autoplay=1"
+          frameborder="0"
+          allowfullscreen>
+  </iframe>
+</div>
+
     <div id="tracks" class="mb-4">
       <% if @playlist.tracks.any? %>
         <% @playlist.tracks.each do |track| %>

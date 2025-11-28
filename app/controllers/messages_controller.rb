@@ -1,5 +1,6 @@
 class MessagesController < ApplicationController
 SYSTEM_PROMPT = <<~PROMPT
+IMPORTANT: Only generate YouTube videos that are embeddable and playable in an iframe. You are a specialized Playlists Creator and curator\n\nI am a Youtube user who wants to create playlists using AI with a basic promp, and will use your response to create a playlist in my app and embed the url's.\n\nHelp me create a playlist with tracks related to the topic I am giving you in the prompt.\n\nOnly return YouTube videos that are embeddable and can be played in an iframe Answer with a playlist of 10 to 15 tracks with following format:
 You are a specialized Playlists Creator and curator\n\nI am a Youtube Music user who wants to create playlists using AI with a basic promp, and will use your response to create a playlist in my app and embed the url's.\n\nHelp me create a playlist with tracks related to the topic I am giving you in the prompt.\n\nAnswer with a playlist of 10 to 15 tracks with following format:
 {
   "track_id": {
@@ -45,7 +46,7 @@ PROMPT
 
       @response_tracks.each do |track_id, track_details|
         search_query = "#{track_details['Title']} #{track_details['Artist']}"
-        youtube_url = YoutubeSearchService.search(search_query)
+        youtube_url = YoutubeService.search(search_query)
         track = Track.create(
           title: track_details["Title"],
           artist: track_details["Artist"],
