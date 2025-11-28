@@ -1,39 +1,57 @@
-<div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
-  <div class="container-fluid">
-    <%= link_to root_path, class: "navbar-brand" do %>
-      <%= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png" %>
+<nav class="navbar navbar-expand-sm navbar-dark">
+  <div class="container-fluid px-4">
+    <%= link_to root_path, class: "navbar-brand d-flex align-items-center" do %>
+      <i class="fas fa-headphones-alt fa-2x text-primary me-2"></i>
+      <span class="fw-bold d-none d-md-inline" style="background: linear-gradient(135deg, #ff953d, #601fc1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-size: 1.4rem; letter-spacing: -0.02em; font-weight: 800;">
+        Muzik
+      </span>
     <% end %>
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" style="box-shadow: none;">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto">
+      <ul class="navbar-nav ms-auto align-items-center">
         <% if user_signed_in? %>
-          <li class="nav-item active">
-            <%= link_to "Home", root_path, class: "nav-link" %>
+          <li class="nav-item">
+            <%= link_to root_path, class: "nav-link #{'active' if current_page?(root_path)}" do %>
+              <i class="fas fa-home me-1"></i>Home
+            <% end %>
           </li>
           <li class="nav-item">
-            <%= link_to "My Profile", user_profile_path, class: "nav-link" %>
+            <%= link_to user_profile_path, class: "nav-link #{'active' if current_page?(user_profile_path)}" do %>
+              <i class="fas fa-user me-1"></i>My Profile
+            <% end %>
           </li>
-          <li class="nav-item dropdown">
-            <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
-            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <%= link_to "My Profile", user_profile_path, class: "dropdown-item" %>
-              <%= link_to "Edit Account", edit_user_registration_path, class: "dropdown-item" %>
-              <%= link_to "Log out", destroy_user_session_path, class: "dropdown-item", data: {turbo_method: :delete} %>
+          <li class="nav-item dropdown ms-2">
+            <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false, style: "width: 40px; height: 40px; border-radius: 50%; object-fit: cover; cursor: pointer;" %>
+            <div class="dropdown-menu dropdown-menu-end mt-2" aria-labelledby="navbarDropdown">
+              <%= link_to user_profile_path, class: "dropdown-item" do %>
+                <i class="fas fa-user me-2" style="width: 20px;"></i>My Profile
+              <% end %>
+              <%= link_to edit_user_registration_path, class: "dropdown-item" do %>
+                <i class="fas fa-cog me-2" style="width: 20px;"></i>Edit Account
+              <% end %>
+              <div class="dropdown-divider" style="border-color: rgba(96, 31, 193, 0.2);"></div>
+              <%= link_to destroy_user_session_path, class: "dropdown-item", data: {turbo_method: :delete} do %>
+                <i class="fas fa-sign-out-alt me-2" style="width: 20px;"></i>Log out
+              <% end %>
             </div>
           </li>
         <% else %>
           <li class="nav-item">
-            <%= link_to "Login", new_user_session_path, class: "nav-link" %>
+            <%= link_to new_user_session_path, class: "nav-link" do %>
+              <i class="fas fa-sign-in-alt me-1"></i>Login
+            <% end %>
           </li>
-          <li class="nav-item">
-            <%= link_to "Sign up", new_user_registration_path, class: "nav-link" %>
+          <li class="nav-item ms-2">
+            <%= link_to new_user_registration_path, class: "btn btn-primary" do %>
+              <i class="fas fa-user-plus me-1"></i>Sign up
+            <% end %>
           </li>
         <% end %>
       </ul>
     </div>
   </div>
-</div>
+</nav>
