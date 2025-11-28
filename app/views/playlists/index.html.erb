@@ -1,20 +1,27 @@
 <h1>My Playlists</h1>
 <p>Follow me!</p>
 <%= link_to "Create New Playlist", new_playlist_path(@chat), class: "btn btn-primary mb-3"%>
-<div class="playlist-list">
+<div class="row g-4">
   <% @playlists.each do |playlist| %>
-    <div class="card mb-3">
-      <div class="card-body d-flex justify-content-between align-items-center">
-        <div>
-          <h5 class="card-title"><%= link_to playlist.title, playlist_path(playlist) %></h5>
-          <p class="text-muted mb-0">By <%= playlist.user.email %></p>
-        </div>
-        <div>
-        <%= bookmark_button(playlist) %>
-          <%= link_to "Delete", playlist_path(playlist), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"},
-              class: "btn btn-danger" %>
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+      <div class="playlist-card p-3">
+        <h5 class="mb-1">
+          <%= link_to playlist.title, playlist_path(playlist), class: "text-white" %>
+        </h5>
+
+        <p class="text-light opacity-75 mb-2">
+          By <%= playlist.user.email %>
+        </p>
+
+        <div class="d-flex justify-content-between align-items-center">
+          <%= bookmark_button(playlist) %>
+
+          <%= link_to "Delete", playlist_path(playlist),
+                data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
+                class: "btn btn-sm btn-danger" %>
         </div>
       </div>
     </div>
   <% end %>
 </div>
+
