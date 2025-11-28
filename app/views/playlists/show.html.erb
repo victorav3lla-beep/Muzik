@@ -73,7 +73,6 @@
                   frameborder="0"
                   allowfullscreen>
           </iframe>
-
           <h5 class="mt-2 mb-1"><%= track.title %></h5>
           <p class="mb-1"><strong>Artist:</strong> <%= track.artist %></p>
           <p class="mb-1"><strong>Duration:</strong> <%= track.duration %> seconds</p>
@@ -90,14 +89,6 @@
   <% end %>
 </div>
 
-    <h3>Add a New Track</h3>
-    <%= simple_form_for [@playlist, @track] do |f| %>
-      <%= f.input :title, placeholder: "Bohemian Rhapsody" %>
-      <%= f.input :artist, placeholder: "Queen" %>
-      <%= f.input :url, placeholder: "https://open.youtube.com/track/..." %>
-      <%= f.input :duration, hint: "Duration in seconds (e.g., 354 for 5:54)" %>
-      <%= f.submit "Add Track", class: "btn btn-primary" %>
-    <% end %>
   </div>
   <div class="col-md-3">
     <h2>Chats</h2>
