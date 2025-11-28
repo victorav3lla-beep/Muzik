@@ -25,7 +25,71 @@ body {
   min-height: 100vh;
 }
 
-// 5. Custom Utilities
+.box div {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background-color: transparent;
+  border: 6px solid rgba(255, 255, 255, 0.8);
+}
+.box div:nth-child(1) {
+  top: 12%;
+  left: 42%;
+  animation: animate 12s linear infinite;
+}
+.box div:nth-child(2) {
+  top: 70%;
+  left: 50%;
+  animation: animate 7s linear infinite;
+}
+.box div:nth-child(3) {
+  top: 17%;
+  left: 6%;
+  animation: animate 9s linear infinite;
+}
+.box div:nth-child(4) {
+  top: 20%;
+  left: 60%;
+  animation: animate 6s linear infinite;
+}
+.box div:nth-child(5) {
+  top: 90%;
+  left: 70%;
+  animation: animate 12s linear infinite;
+}
+.box div:nth-child(6) {
+  top: 35%;
+  left: 35%;
+  animation: animate 7s linear infinite;
+}
+.box div:nth-child(7) {
+  top: 80%;
+  left: 20%;
+  animation: animate 14s linear infinite;
+}
+.box div:nth-child(8) {
+  top: 30%;
+  left: 90%;
+  animation: animate 11s linear infinite;
+}
+.box div:nth-child(9) {
+  top: 40%;
+  left: 65%;
+  animation: animate 9s linear infinite;
+}
+
+@keyframes animate {
+  0% {
+    transform: scale(0) translateY(0) rotate(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.3) translateY(-90px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+
 .bg-accent {
   background-color: $secondary;
 }
@@ -33,7 +97,8 @@ body {
 // Card Designs
 .card-custom {
   background: rgba(lighten($body-bg, 8%), 0.85);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(20px);
+  opacity: 0.95;
   border: 1px solid rgba($purple, 0.3);
   color: white;
   transition: all 0.3s ease;
@@ -49,14 +114,14 @@ body {
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba($orange, 0.1), transparent);
+    background: linear-gradient(90deg, transparent, rgba($orange, 0.2), transparent);
     transition: left 0.5s;
   }
 
   &:hover {
     transform: translateY(-8px);
-    border-color: rgba($orange, 0.6);
-    box-shadow: 0 12px 48px rgba($orange, 0.25), 0 0 20px rgba($purple, 0.2);
+    border-color: rgba($orange, 0.3);
+    box-shadow: 0 12px 48px rgba($orange, 0.25), 0 0 20px rgba($purple, 0.1);
 
     &::before {
       left: 100%;
@@ -89,7 +154,7 @@ body {
 
   &:hover {
     transform: translateY(-10px) scale(1.02);
-    box-shadow: 0 20px 50px rgba($purple, 0.5), 0 10px 25px rgba($orange, 0.3);
+    box-shadow: 0 20px 50px rgba($purple, 0.1), 0 10px 25px rgba($orange, 0.1);
 
     &::after {
       opacity: 1;
@@ -195,15 +260,6 @@ h1, h2, h3, h4, h5, h6,
   -webkit-text-fill-color: transparent;
   background-clip: text;
   animation: shimmer 3s linear infinite;
-}
-
-@keyframes shimmer {
-  0% {
-    background-position: 0% center;
-  }
-  100% {
-    background-position: 200% center;
-  }
 }
 
 // Elegant lead text
@@ -330,6 +386,8 @@ h1, h2, h3, h4, h5, h6,
   letter-spacing: 0.01em;
   font-size: 0.95rem;
 
+
+
   &::before {
     content: '';
     position: absolute;
@@ -370,8 +428,8 @@ h1, h2, h3, h4, h5, h6,
 
     &:hover {
       background: $orange;
-      color: white;
-      box-shadow: 0 6px 25px rgba($orange, 0.4);
+      color: rgb(0, 0, 0);
+      box-shadow: 0 6px 25px rgba($orange, 0.2);
       transform: translateY(-2px);
     }
   }
@@ -455,7 +513,25 @@ html {
   scroll-behavior: smooth;
 }
 
+// Counter badge animation
+[id^="likes_counter_playlist_"],
+[id^="followers_counter_user_"] {
+  transition: all 0.3s ease;
+}
+
+.bookmark-btn {
+  position: relative;
+  overflow: visible;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
-

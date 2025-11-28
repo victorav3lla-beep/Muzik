@@ -1,0 +1,79 @@
+.new-playlist-card, .sidebar-card {
+  background-color: #590f65;
+  opacity: 70%;
+  color: #FFFFFF;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  text-align: center;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+  }
+
+  h1, h2 {
+    color: #FF953D;
+  }
+
+  p, li {
+    color: #FFFFFF;
+  }
+
+  .chat-messages {
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 0.5rem;
+    background-color: rgba(255, 149, 61, 0.1);
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  input, textarea {
+    background-color: #601FC1;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 0.5rem;
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 5px #FF953D;
+    }
+  }
+
+  .btn-primary {
+    background-color: #FF953D;
+    border: none;
+
+    &:hover {
+      background-color: rgba(255, 149, 61, 0.9);
+    }
+  }
+
+  .btn-link {
+    color: #FF953D;
+    text-decoration: underline;
+
+    &:hover {
+      color: #FFFFFF;
+    }
+  }
+}
+
+.back-btn {
+  background-color: #FF953D;      // your primary orange
+  color: #FFFFFF !important;      // white text
+  border: none;
+  padding: 0.5rem 1.2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    background-color: #e57f28;    // slightly darker orange hover
+    transform: translateY(-2px);  // tiny lift effect
+    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+    text-decoration: none;
+  }
+}
