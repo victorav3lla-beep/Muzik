@@ -1,3 +1,19 @@
 <%= turbo_stream.replace "bookmark_#{@bookmarkable.class.name.downcase}_#{@bookmarkable.id}" do %>
   <%= bookmark_button(@bookmarkable, current_user) %>
 <% end %>
+
+<% if @bookmarkable.is_a?(Playlist) %>
+  <%= turbo_stream.replace "likes_counter_playlist_#{@bookmarkable.id}" do %>
+    <div id="likes_counter_playlist_<%= @bookmarkable.id %>" class="badge rounded-pill" style="background: linear-gradient(135deg, #ff953d, #601fc1); padding: 0.5rem 1rem; font-size: 0.9rem;">
+      <i class="fas fa-heart me-1"></i>
+      <%= @bookmarkable.bookmarks.count %> <%= @bookmarkable.bookmarks.count == 1 ? 'like' : 'likes' %>
+    </div>
+  <% end %>
+<% elsif @bookmarkable.is_a?(User) %>
+  <%= turbo_stream.replace "followers_counter_user_#{@bookmarkable.id}" do %>
+    <div id="followers_counter_user_<%= @bookmarkable.id %>" class="text-muted" style="font-size: 0.9rem;">
+      <i class="fas fa-users me-1"></i>
+      <%= @bookmarkable.followers.count %> <%= @bookmarkable.followers.count == 1 ? 'follower' : 'followers' %>
+    </div>
+  <% end %>
+<% end %>
