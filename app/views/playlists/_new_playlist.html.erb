@@ -12,19 +12,3 @@
       <%= f.button :submit, 'Create Playlist', class: 'btn btn-primary' %>
     <% end %>
   </div>
-
-  <div class="col-md-3">
-    <h2>Chats</h2>
-    <div class="mb-4">
-      <% if @user_playlists.present? %>
-        <ul>
-          <% @user_playlists.each do |playlist| %>
-            <li><%= link_to playlist.title, playlist_path(playlist) %> </li>
-          <% end %>
-        </ul>
-      <% else %>
-        There are no chats yet.
-      <% end %>
-    </div>
-  </div>
-<%= link_to "Back to playlists", playlists_path, class: "button" %>

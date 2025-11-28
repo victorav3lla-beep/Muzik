@@ -49,7 +49,19 @@
 <div class="row">
   <div class="col">
     <hr>
+    <% video_ids = @playlist.tracks.map { |t| t.url.split("v=").last }.join(",") %>
     <h2>Tracks (<%= @playlist.tracks.count %>)</h2>
+    <button class="btn btn-primary mb-3"
+        onclick="document.getElementById('player').style.display = 'block'">
+      ▶️ Play All Inside App
+    </button>
+    <div id="player" style="display:none; margin-bottom: 20px;">
+      <iframe width="100%" height="360"
+          src="https://www.youtube.com/embed?playlist=<%= video_ids %>&autoplay=1"
+          frameborder="0"
+          allowfullscreen>
+      </iframe>
+    </div>
     <div id="tracks" class="mb-4">
       <% if @playlist.tracks.any? %>
         <% @playlist.tracks.each do |track| %>
@@ -85,21 +97,20 @@
       <%= f.submit "Add Track", class: "btn btn-primary" %>
     <% end %>
   </div>
-  <%# <div class="col-md-3">
+  <div class="col-md-3">
     <h2>Chats</h2>
     <div class="mb-4">
-      <% if @playlist.tracks.any? %>
-  <ul>
-    <%# @playlist.tracks.each do |chat| %>
-      <li><%#= link_to chat.title, chat_path(chat) %></li>
-      <%# end %>
-    </ul>
-    <%# else %>
-    <%# There are no chats yet. %>
-    <%# end %>
-    <%# <%= button_to "New chat", playlist_chats_path(@playlist), class: "btn btn-primary" %>
-    <%# </div>
-  </div> %>
+      <% if @user_playlists.present? %>
+        <ul>
+          <% @user_playlists.each do |playlist| %>
+            <li><%= link_to playlist.title, playlist_path(playlist) %> </li>
+          <% end %>
+        </ul>
+      <% else %>
+        There are no chats yet.
+      <% end %>
+      <%= link_to "Create New Playlist", new_playlist_path(@chat), class: "btn btn-primary mb-3"%>
+    </div>
   </div>
   <%= link_to "Back to playlists", playlists_path, class: "btn btn-outline-primary mt-3" %>
 </div>

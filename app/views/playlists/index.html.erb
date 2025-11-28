@@ -1,8 +1,6 @@
 <h1>My Playlists</h1>
 <p>Follow me!</p>
-
 <%= link_to "Create New Playlist", new_playlist_path(@chat), class: "btn btn-primary mb-3"%>
-
 <div class="playlist-list">
   <% @playlists.each do |playlist| %>
     <div class="card mb-3">
@@ -11,7 +9,11 @@
           <h5 class="card-title"><%= link_to playlist.title, playlist_path(playlist) %></h5>
           <p class="text-muted mb-0">By <%= playlist.user.email %></p>
         </div>
+        <div>
         <%= bookmark_button(playlist) %>
+          <%= link_to "Delete", playlist_path(playlist), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"},
+              class: "btn btn-danger" %>
+        </div>
       </div>
     </div>
   <% end %>
