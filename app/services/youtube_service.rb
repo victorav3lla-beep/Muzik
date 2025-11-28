@@ -1,12 +1,13 @@
 require 'net/http'
 require 'json'
 
-class YoutubeSearchService
+class YoutubeService
   def self.search(query)
     api_key = ENV['YOUTUBE_API_KEY']
     encoded_query = URI.encode_www_form_component(query)
-    url = "https://www.googleapis.com/youtube/v3/search?part=snippet&q=#{encoded_query}&type=video&maxResults=1&key=#{api_key}"
 
+    videoEmbeddable=true
+    url = "https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&videoEmbeddable=true&maxResults=1&q=#{encoded_query}&key=#{api_key}"
     response = Net::HTTP.get(URI(url))
     data = JSON.parse(response)
 
