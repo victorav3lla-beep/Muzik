@@ -1,0 +1,47 @@
+.footer {
+  background-color: #FF953D; // primary color
+  color: #FFFFFF;
+  padding: 1.5rem 0;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+
+  a {
+    color: #FFFFFF;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: #09203E;        // dark contrast
+      text-decoration: underline;
+    }
+  }
+
+  .list-inline-item {
+    margin: 0 0.75rem;
+    position: relative;
+
+    &:after {
+      content: "|";
+      color: rgba(255, 255, 255, 0.5);
+      position: absolute;
+      right: -0.75rem;
+    }
+
+    &:last-child:after {
+      content: "";
+    }
+  }
+
+  p {
+    margin-bottom: 0.5rem;
+  }
+
+  // subtle hover effect for the whole footer
+  &:hover {
+    background-color: rgba(255, 149, 61, 0.9);
+    box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.2);
+  }
+}
+
+// Extra glow effect on footer links
+.footer a:hover {
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
+}
