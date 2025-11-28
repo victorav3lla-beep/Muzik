@@ -88,14 +88,6 @@
         <p class="text-muted">No tracks yet. Add your first track below!</p>
       <% end %>
     </div>
-    <h3>Add a New Track</h3>
-    <%= simple_form_for [@playlist, @track] do |f| %>
-      <%= f.input :title, placeholder: "Bohemian Rhapsody" %>
-      <%= f.input :artist, placeholder: "Queen" %>
-      <%= f.input :url, placeholder: "https://open.youtube.com/track/..." %>
-      <%= f.input :duration, hint: "Duration in seconds (e.g., 354 for 5:54)" %>
-      <%= f.submit "Add Track", class: "btn btn-primary" %>
-    <% end %>
   </div>
   <div class="col-md-3">
     <h2>Chats</h2>
@@ -111,6 +103,13 @@
       <% end %>
       <%= link_to "Create New Playlist", new_playlist_path(@chat), class: "btn btn-primary mb-3"%>
     </div>
+  </div>
+
+   <div id="new_message_container">
+    <%= simple_form_for [@chat, @message] do |f| %>
+      <%= f.input :content, label: false, required: true, placeholder: "I want to discover new muzik" %>
+      <%= f.button :submit, 'Add to Playlist', class: 'btn btn-primary' %>
+    <% end %>
   </div>
   <%= link_to "Back to playlists", playlists_path, class: "btn btn-outline-primary mt-3" %>
 </div>

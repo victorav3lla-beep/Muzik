@@ -1,0 +1,18 @@
+<div class="card mb-2 p-3">
+  <iframe width="100%" height="180"
+            src="<%= track.url.gsub('watch?v=', 'embed/') %>"
+            title="<%= track.title %>"
+            frameborder="0"
+            allowfullscreen>
+  </iframe>
+  <h5><%= track.title %></h5>
+  <p class="mb-1"><strong>Artist:</strong> <%= track.artist %></p>
+  <p class="mb-1"><strong>Duration:</strong> <%= track.duration %> seconds</p>
+  <p class="mb-0">
+    <%= link_to "Listen", track.url, target: "_blank", class: "btn btn-sm btn-outline-primary" %>
+  </p>
+  <p class="mb-0">
+    <%= link_to "Delete", track_path(track), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"},
+              class: "btn btn-danger" %>
+  </p>
+</div>

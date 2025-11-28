@@ -24,6 +24,8 @@ class PlaylistsController < ApplicationController
     @playlist = Playlist.find(params[:id])
     @track = Track.new # Initialize empty track for the form
     @user_playlists = Playlist.where(user: current_user)
+    @chat = @playlist.chat
+    @message = Message.new
   end
 
   def destroy
