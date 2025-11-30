@@ -4,35 +4,22 @@
     <!-- Main Playlist Card -->
     <div class="col-md-8">
       <div class="card new-playlist-card p-4 shadow-sm">
-<h1>New playlist</h1>
-<p>What are you in the mood to listen to? 🎶🎵</p>
-  <% @chat.messages.each do |message| %>
-    <p>
-      <strong><%= message.role_string %></strong>
-      <%= raw((message.content)) %>
-    </p>
-  <% end %>
-  <div id="new_message_container">
-    <%= simple_form_for [@chat, @message] do |f| %>
-      <%= f.input :content, label: "", required: true, placeholder: "I want to discover new muzik" %>
-      <%= f.button :submit, 'Create Playlist', class: 'btn btn-primary' %>
-    <% end %>
-  </div>
-
-  <div class="col-md-3">
-    <h2></h2>
-    <div class="mb-4">
-      <% if @user_playlists.present? %>
-        <ul>
-          <% @playlist.tracks.each do |playlist| %>
-            <li><%= link_to playlist.title, playlist_path(playlist) %> </li>
+        <h1>New playlist</h1>
+        <p>What are you in the mood to listen to? 🎶🎵</p>
+        <% @chat.messages.each do |message| %>
+          <p>
+            <strong><%= message.role_string %></strong>
+            <%= raw((message.content)) %>
+          </p>
+        <% end %>
+        <div id="new_message_container">
+          <%= simple_form_for [@chat, @message] do |f| %>
+            <%= f.input :content, label: "", required: true, placeholder: "I want to discover new muzik" %>
+            <%= f.button :submit, 'Create Playlist', class: 'btn btn-primary' %>
           <% end %>
-        </ul>
-      <% else %>
-        There are no chats yet.
-      <% end %>
+        </div>
+      </div>
     </div>
-  </div>
 
     <!-- Sidebar with Previous Playlists -->
     <div class="col-md-4">
