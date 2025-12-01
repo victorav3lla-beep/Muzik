@@ -1,6 +1,5 @@
 <div class="container my-5">
   <div class="row justify-content-center g-4">
-
     <!-- Main Playlist Card -->
     <div class="col-md-8">
       <div class="card new-playlist-card p-4 shadow-sm">
@@ -14,32 +13,29 @@
         <% end %>
         <div id="new_message_container">
           <%= simple_form_for [@chat, @message] do |f| %>
-            <%= f.input :content, label: "", required: true, placeholder: "I want to discover new muzik" %>
+            <%= f.input :content, label: false, required: true, placeholder: "I want to discover new muzik" %>
             <%= f.button :submit, 'Create Playlist', class: 'btn btn-primary' %>
           <% end %>
         </div>
-      </div>
     </div>
-
-    <!-- Sidebar with Previous Playlists -->
-    <div class="col-md-4">
-      <div class="card sidebar-card p-3 shadow-sm">
-        <h2 class="mb-3">Chats</h2>
-        <% if @user_playlists.present? %>
-          <ul class="list-unstyled">
-            <% @user_playlists.each do |playlist| %>
-              <li><%= link_to playlist.title, playlist_path(playlist), class: "d-block mb-1" %></li>
+  </div>
+        <!-- Sidebar with Previous Playlists -->
+        <div class="col-md-4">
+          <div class="card sidebar-card p-3 shadow-sm">
+            <h2 class="mb-3">Chats</h2>
+            <% if @user_playlists.present? %>
+              <ul class="list-unstyled">
+                <% @user_playlists.each do |playlist| %>
+                  <li><%= link_to playlist.title, playlist_path(playlist), class: "d-block mb-1" %></li>
+                <% end %>
+              </ul>
+            <% else %>
+              <p class="text-muted">There are no chats yet.</p>
             <% end %>
-          </ul>
-        <% else %>
-          <p class="text-muted">There are no chats yet.</p>
-        <% end %>
+          </div>
+        </div>
       </div>
-    </div>
-
-  </div>
-
-  <div class="mt-4 text-center">
-   <%= link_to "Back to playlists", playlists_path, class: "btn back-btn" %>
-  </div>
 </div>
+      <div class="mt-4 text-center">
+        <%= link_to "Back to playlists", playlists_path, class: "btn back-btn" %>
+      </div>
