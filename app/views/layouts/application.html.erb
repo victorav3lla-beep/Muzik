@@ -10,13 +10,15 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body data-controller="custom-cursor">
+  <body data-controller="custom-cursor" class="d-flex flex-column min-vh-100">
     <!-- Custom Cursor Elements -->
     <div class="custom-cursor-dot" data-custom-cursor-target="dot"></div>
     <div class="custom-cursor-circle" data-custom-cursor-target="circle"></div>
 
     <%= render "shared/navbar" %>
-    <%= yield %>
+    <main class="flex-grow-1">
+      <%= yield %>
+    </main>
     <%= render "shared/footer" %>
   </body>
 </html>

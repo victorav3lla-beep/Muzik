@@ -1,27 +1,149 @@
-<h1>My Playlists</h1>
-<p>Follow me!</p>
-<%= link_to "Create New Playlist", new_playlist_path(@chat), class: "btn btn-primary mb-3"%>
-<div class="row g-4">
-  <% @playlists.each do |playlist| %>
-    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-      <div class="playlist-card p-3">
-        <h5 class="mb-1">
-          <%= link_to playlist.title, playlist_path(playlist), class: "text-white" %>
-        </h5>
+<div class="container py-5">
+  <!-- Hero Header -->
+  <div class="playlists-hero text-center mb-5">
+    <h1 class="display-3 fw-bold mb-3 text-shadow-strong">
+      Your <span class="text-gradient text-glow">Playlists</span>
+    </h1>
+    <p class="lead mb-4 text-shadow-soft" style="max-width: 600px; margin: 0 auto; opacity: 0.9;">
+      Manage your music collections and discover the perfect soundtrack for every moment
+    </p>
 
-        <p class="text-light opacity-75 mb-2">
-          By <%= playlist.user.email %>
-        </p>
-
-        <div class="d-flex justify-content-between align-items-center">
-          <%= bookmark_button(playlist) %>
-
-          <%= link_to "Delete", playlist_path(playlist),
-                data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
-                class: "btn btn-sm btn-danger" %>
-        </div>
+    <!-- Stats Bar -->
+    <div class="d-flex justify-content-center gap-4 mb-4 flex-wrap">
+      <div class="stat-badge">
+        <i class="fas fa-list-ul me-2"></i>
+        <strong><%= @playlists.count %></strong> Playlists
       </div>
+      <div class="stat-badge">
+        <i class="fas fa-music me-2"></i>
+        <strong><%= @playlists.sum { |p| p.tracks.count } %></strong> Tracks
+      </div>
+    </div>
+
+    <!-- Primary CTA -->
+    <%= link_to new_playlist_path(@chat), class: "btn btn-primary btn-lg px-5 py-3 shadow-lg" do %>
+      <i class="fas fa-plus-circle me-2"></i>Create New Playlist
+    <% end %>
+  </div>
+
+  <!-- Playlists Grid -->
+  <% if @playlists.any? %>
+    <div class="row g-4 mt-4">
+      <% @playlists.each do |playlist| %>
+        <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
+          <div class="playlist-card-modern">
+            <!-- Card Header -->
+            <div class="playlist-card-header">
+              <div class="playlist-icon">
+                <i class="fas fa-compact-disc fa-3x"></i>
+              </div>
+            </div>
+
+            <!-- Card Body -->
+            <div class="playlist-card-body">
+              <h5 class="playlist-title mb-2">
+                <%= link_to playlist.title, playlist_path(playlist), class: "text-white text-decoration-none" %>
+              </h5>
+
+              <p class="playlist-meta mb-3">
+                <i class="fas fa-user-circle me-1"></i>
+                <%= playlist.user.email.split('@').first %>
+              </p>
+
+              <div class="playlist-stats mb-3">
+                <span class="badge bg-light text-dark">
+                  <i class="fas fa-music me-1"></i>
+                  <%= playlist.tracks.count %> tracks
+                </span>
+              </div>
+
+              <!-- Track Preview -->
+              <% if playlist.tracks.any? %>
+                <div class="track-preview mb-3">
+                  <small class="text-light opacity-75">
+                    <i class="fas fa-headphones me-1"></i>
+                    <%= playlist.tracks.first.title %>
+                    <% if playlist.tracks.count > 1 %>
+                      <span class="ms-1">+<%= playlist.tracks.count - 1 %> more</span>
+                    <% end %>
+                  </small>
+                </div>
+              <% else %>
+                <div class="track-preview mb-3">
+                  <small class="text-light opacity-50">
+                    <i class="fas fa-info-circle me-1"></i>No tracks yet
+                  </small>
+                </div>
+              <% end %>
+            </div>
+
+            <!-- Card Footer Actions -->
+            <div class="playlist-card-footer">
+              <div class="d-flex justify-content-between align-items-center gap-2">
+                <%= bookmark_button(playlist) %>
+
+                <div class="btn-group">
+                  <%= link_to playlist_path(playlist), class: "btn btn-sm btn-outline-light" do %>
+                    <i class="fas fa-play"></i>
+                  <% end %>
+                  <%= link_to playlist_path(playlist),
+                      data: { turbo_method: :delete, turbo_confirm: "Delete '#{playlist.title}'? This cannot be undone." },
+                      class: "btn btn-sm btn-outline-danger" do %>
+                    <i class="fas fa-trash"></i>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <!-- Empty State -->
+    <div class="empty-state text-center py-5 mt-5">
+      <div class="empty-state-icon mb-4">
+        <i class="fas fa-music fa-5x" style="opacity: 0.3;"></i>
+      </div>
+      <h3 class="mb-3">No playlists yet</h3>
+      <p class="lead mb-4" style="opacity: 0.7; max-width: 500px; margin: 0 auto;">
+        Start your musical journey by creating your first AI-powered playlist
+      </p>
+      <%= link_to new_playlist_path(@chat), class: "btn btn-primary btn-lg" do %>
+        <i class="fas fa-plus-circle me-2"></i>Create Your First Playlist
+      <% end %>
     </div>
   <% end %>
 </div>
+
+<style>
+.playlists-hero {
+  animation: fadeInDown 0.6s ease-out;
+}
+
+.stat-badge {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 0.75rem 1.5rem;
+  border-radius: 50px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.stat-badge:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+</style>
 
